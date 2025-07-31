@@ -8,9 +8,15 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token"); // 👈 JWT token
+
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/${id}`)
+      .get(`http://localhost:8080/api/product/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 🛡️ Secure API Call
+        },
+      })
       .then((res) => setProduct(res.data))
       .catch((err) => {
         console.error("Error fetching product:", err);
@@ -23,7 +29,11 @@ const ProductDetail = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/product/${id}`);
+      await axios.delete(`http://localhost:8080/api/product/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("🗑️ Product deleted successfully!");
       navigate("/");
     } catch (error) {
@@ -108,4 +118,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
- 

@@ -60,8 +60,16 @@ const AddProduct = () => {
     formData.append("imageFile", imageFile);
 
     try {
-      await axios.post("http://localhost:8080/api/product", formData);
-      toast.success("Product added successfully!");
+      const token = localStorage.getItem("token");
+
+      await axios.post("http://localhost:8080/api/product", formData, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      toast.success("✅ Product added successfully!");
 
       setProduct({
         name: "",
@@ -75,8 +83,8 @@ const AddProduct = () => {
       });
       setImageFile(null);
     } catch (error) {
-      toast.error("Failed to add product.");
       console.error(error);
+      toast.error("❌ Failed to add product.");
     }
   };
 
@@ -97,6 +105,7 @@ const AddProduct = () => {
             placeholder="Name"
             value={product.name}
             onChange={handleChange}
+            required
           />
           <input
             className="bg-[#2a2a3c] text-white p-3 rounded-xl"
@@ -104,6 +113,7 @@ const AddProduct = () => {
             placeholder="Brand"
             value={product.brand}
             onChange={handleChange}
+            required
           />
           <input
             className="bg-[#2a2a3c] text-white p-3 rounded-xl"
@@ -111,6 +121,7 @@ const AddProduct = () => {
             placeholder="Price"
             value={product.price}
             onChange={handleChange}
+            required
           />
           <input
             className="bg-[#2a2a3c] text-white p-3 rounded-xl"
@@ -118,6 +129,7 @@ const AddProduct = () => {
             placeholder="Category"
             value={product.category}
             onChange={handleChange}
+            required
           />
           <input
             className="bg-[#2a2a3c] text-white p-3 rounded-xl"
@@ -125,6 +137,7 @@ const AddProduct = () => {
             type="date"
             value={product.releasedDate}
             onChange={handleChange}
+            required
           />
           <input
             className="bg-[#2a2a3c] text-white p-3 rounded-xl"
@@ -132,6 +145,7 @@ const AddProduct = () => {
             placeholder="Quantity"
             value={product.quantity}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -142,6 +156,7 @@ const AddProduct = () => {
           placeholder="Description"
           value={product.description}
           onChange={handleChange}
+          required
         ></textarea>
 
         <div className="flex items-center gap-4">

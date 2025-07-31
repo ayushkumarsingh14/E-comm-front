@@ -10,8 +10,15 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const token = localStorage.getItem("token"); // JWT token fetch
+
         const res = await axios.get(
-          `http://localhost:8080/api/product/search?keyword=${searchTerm}`
+          `http://localhost:8080/api/product/search?keyword=${searchTerm}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setProducts(res.data);
       } catch (err) {
@@ -57,9 +64,13 @@ const ProductList = () => {
               </Link>
               <h3 className="text-xl font-bold">{product.name}</h3>
               <p className="text-sm text-gray-400 mb-1">{product.brand}</p>
-              <p className="text-sm text-gray-300 mb-2 line-clamp-2">{product.description}</p>
+              <p className="text-sm text-gray-300 mb-2 line-clamp-2">
+                {product.description}
+              </p>
               <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold text-green-400">₹{product.price}</span>
+                <span className="text-lg font-semibold text-green-400">
+                  ₹{product.price}
+                </span>
                 <span
                   className={`text-xs px-3 py-1 rounded-full font-semibold ${
                     product.available

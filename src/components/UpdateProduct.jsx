@@ -10,12 +10,17 @@ const UpdateProduct = () => {
   const [product, setProduct] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
+  const token = localStorage.getItem("token"); // 🔐 Get token
+
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/${id}`)
+      .get(`http://localhost:8080/api/product/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Token for GET
+        },
+      })
       .then((res) => {
         const data = res.data;
-        // Ensure date is in YYYY-MM-DD for input
         if (data.releasedDate) {
           data.releasedDate = new Date(data.releasedDate).toISOString().split("T")[0];
         }
@@ -39,25 +44,28 @@ const UpdateProduct = () => {
     setImageFile(e.target.files[0]);
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const formData = new FormData();
-  formData.append("p", new Blob([JSON.stringify(product)], { type: "application/json" }));
-  if (imageFile) {
-    formData.append("imageFile", imageFile);
-  }
+    const formData = new FormData();
+    formData.append("p", new Blob([JSON.stringify(product)], { type: "application/json" }));
+    if (imageFile) {
+      formData.append("imageFile", imageFile);
+    }
 
-  try {
-    await axios.put(`http://localhost:8080/api/product/${id}`, formData);
-    toast.success("Product updated successfully!");
-    navigate(`/product/${id}`);
-  } catch (error) {
-    console.error("Update error:", error);
-    toast.error("Update failed. Check all fields.");
-  }
-};
-
+    try {
+      await axios.put(`http://localhost:8080/api/product/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ Token for PUT
+        },
+      });
+      toast.success("Product updated successfully!");
+      navigate(`/product/${id}`);
+    } catch (error) {
+      console.error("Update error:", error);
+      toast.error("Update failed. Check all fields.");
+    }
+  };
 
   if (!product) return <div className="text-white text-center p-6">Loading...</div>;
 

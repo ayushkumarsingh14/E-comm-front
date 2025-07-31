@@ -16,17 +16,21 @@ const Cart = () => {
   };
 
   if (cartItems.length === 0) {
-    return <div className="text-center text-white p-10 text-xl">🛒 Your cart is empty.</div>;
+    return (
+      <div className="text-center text-white p-10 text-2xl font-semibold">
+        🛒 Your cart is empty.
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white px-4 py-10">
       <div className="max-w-4xl mx-auto space-y-6">
-        <h2 className="text-3xl font-bold mb-6">🛍️ Your Cart</h2>
+        <h2 className="text-4xl font-bold mb-6 text-center">🛍️ Your Cart</h2>
         {cartItems.map((item, idx) => (
           <div
             key={idx}
-            className="flex items-center justify-between bg-[#1e1e2f] p-5 rounded-xl border border-gray-700 shadow"
+            className="flex items-center justify-between bg-[#1e1e2f] p-5 rounded-xl border border-gray-700 shadow-lg"
           >
             <div className="flex items-center gap-4">
               <img
@@ -41,7 +45,7 @@ const Cart = () => {
             </div>
             <button
               onClick={() => handleRemove(idx)}
-              className="text-red-400 hover:text-red-600 font-bold"
+              className="text-red-400 hover:text-red-600 font-bold text-xl"
             >
               ❌
             </button>
