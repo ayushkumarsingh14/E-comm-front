@@ -62,7 +62,7 @@ const AddProduct = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.post("http://localhost:8080/api/product", formData, {
+      await axios.post("https://ecom-pqom.onrender.com/api/product", formData, {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

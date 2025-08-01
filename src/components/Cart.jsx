@@ -34,7 +34,7 @@ const Cart = () => {
           >
             <div className="flex items-center gap-4">
               <img
-                src={`http://localhost:8080/api/product/${item.id}/image`}
+                src={`https://ecom-pqom.onrender.com/api/product/${item.id}/image`}
                 alt={item.name}
                 className="w-20 h-20 object-cover rounded-xl border border-gray-600"
               />

@@ -13,7 +13,7 @@ const ProductList = () => {
         const token = localStorage.getItem("token"); // JWT token fetch
 
         const res = await axios.get(
-          `http://localhost:8080/api/product/search?keyword=${searchTerm}`,
+          `https://ecom-pqom.onrender.com/api/product/search?keyword=${searchTerm}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const ProductList = () => {
             >
               <Link to={`/product/${product.id}`}>
                 <img
-                  src={`http://localhost:8080/api/product/${product.id}/image`}
+                  src={`https://ecom-pqom.onrender.com/api/product/${product.id}/image`}
                   alt={product.name}
                   className="rounded-xl h-48 w-full object-cover mb-4 border border-gray-700"
                 />

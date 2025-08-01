@@ -12,7 +12,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/${id}`, {
+      .get(`https://ecom-pqom.onrender.com/api/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // 🛡️ Secure API Call
         },
@@ -29,7 +29,7 @@ const ProductDetail = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/product/${id}`, {
+      await axios.delete(`https://ecom-pqom.onrender.com/api/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -60,7 +60,7 @@ const ProductDetail = () => {
       <div className="max-w-5xl mx-auto bg-[#1e1e2f] p-10 rounded-3xl shadow-2xl">
         <div className="grid md:grid-cols-2 gap-10">
           <img
-            src={`http://localhost:8080/api/product/${product.id}/image`}
+            src={`https://ecom-pqom.onrender.com/api/product/${product.id}/image`}
             alt={product.name}
             className="w-full h-[400px] object-cover rounded-xl border border-gray-700 shadow-md"
           />

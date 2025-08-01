@@ -1,5 +1,5 @@
 export const loginUser = async (username, password) => {
-  const response = await fetch("http://localhost:8080/login", {
+  const response = await fetch("https://ecom-pqom.onrender.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -17,7 +17,7 @@ export const loginUser = async (username, password) => {
 
 
 export const registerUser = async (username, password) => {
-  const response = await fetch("http://localhost:8080/register", {
+  const response = await fetch("https://ecom-pqom.onrender.com/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

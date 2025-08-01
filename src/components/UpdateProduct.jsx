@@ -14,7 +14,7 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/${id}`, {
+      .get(`https://ecom-pqom.onrender.com/api/product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Token for GET
         },
@@ -54,7 +54,7 @@ const UpdateProduct = () => {
     }
 
     try {
-      await axios.put(`http://localhost:8080/api/product/${id}`, formData, {
+      await axios.put(`https://ecom-pqom.onrender.com/api/product/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Token for PUT
         },
